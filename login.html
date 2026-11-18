@@ -19,7 +19,7 @@
 <header class="site-header">
   <div class="nav-wrap">
     <a href="index.html" class="brand">
-      <div class="logo-placeholder">Existing<br>ROCKS<br>logo</div>
+      <img class="site-logo" src="assets/rocks-logo.png" alt="The ROCKS, Inc. logo">
       <div class="brand-copy"><strong>THE ROCKS, INC.</strong><span>Leadership through mentorship</span></div>
     </a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="mainnav">Menu</button>
@@ -61,43 +61,31 @@
 
 <section class="page-hero">
   <div class="inner">
-    <div class="breadcrumbs"><a href="index.html">Home</a> / Volunteer demo login</div>
-    <div class="eyebrow">Interactive prototype</div>
-    <h1>Choose a volunteer demo view.</h1>
-    <p>Preview the volunteer experience or the chapter coordinator workspace. No username or password is needed for this design demo.</p>
+    <div class="breadcrumbs"><a href="index.html">Home</a> / Sign in</div>
+    <div class="eyebrow">The ROCKS</div>
+    <h1>Sign in to your account.</h1>
+    <p>Enter your username and password to access your account.</p>
   </div>
 </section>
 
 <section class="section login-demo-section">
-  <div class="login-demo-note"><strong>Demo only:</strong> These buttons simulate choosing a role; they do not authenticate anyone or protect the browser-stored prototype data. Use synthetic data only.</div>
   <div class="login-demo-grid">
     <article class="login-demo-card">
-      <span class="opportunity-tag">Volunteer · Member</span>
-      <h2>My volunteer dashboard</h2>
-      <p>See a member’s volunteer profile, browse assignments, apply for an opportunity, and track submitted or approved service.</p>
-      <ul class="feature-list">
-        <li>Update profile and availability</li>
-        <li>Discover opportunities that support the mission</li>
-        <li>View personal applications and service history</li>
-      </ul>
-      <button class="btn btn-gold" type="button" data-demo-role="volunteer">Continue as a volunteer</button>
+      <h2>Sign in here</h2>
+      <p>Enter your username and password to continue.</p>
+      <form class="demo-login-form" id="demo-login-form">
+        <div class="field"><label for="demo-username">Username</label><input id="demo-username" name="username" autocomplete="username" required></div>
+        <div class="field"><label for="demo-password">Password</label><input id="demo-password" name="password" type="password" autocomplete="current-password" required></div>
+        <button class="btn btn-gold" type="submit">Sign in</button>
+        <p class="form-feedback" id="login-demo-status" role="status" aria-live="polite"></p>
+      </form>
     </article>
-    <article class="login-demo-card login-demo-card-admin">
-      <span class="opportunity-tag">Coordinator · Admin demo</span>
-      <h2>Volunteer coordinator workspace</h2>
-      <p>Preview a chapter leader’s view for keeping volunteer information organized and monitoring opportunities and participation.</p>
-      <ul class="feature-list">
-        <li>Search and update the volunteer roster</li>
-        <li>Review applications and opportunity capacity</li>
-        <li>Export roster data to an Excel-compatible CSV</li>
-      </ul>
-      <button class="btn btn-dark" type="button" data-demo-role="coordinator">Continue as a coordinator</button>
-    </article>
+    <p class="login-signup-link">Don’t have an account? <a href="volunteer.html?demoRole=member-volunteer&amp;firstTime=true#volunteer-profile">Sign up here</a>. Not a ROCKS member? <a href="volunteer.html?demoRole=non-member-volunteer&amp;firstTime=true#volunteer-profile">Sign up as a guest</a>.</p>
   </div>
   <p class="login-demo-status" id="login-demo-status" role="status" aria-live="polite"></p>
   <div class="login-production-note">
-    <h2>Returning ROCKS members</h2>
-    <p>In production, member identity, membership status, and chapter affiliation should come from ClubExpress. This prototype does not connect to ClubExpress or provide a real member login.</p>
+    <h2>Need help?</h2>
+    <p>If you are having trouble signing in, contact The ROCKS for assistance.</p>
     <a href="contact.html">Need help? Contact The ROCKS</a>
   </div>
 </section>
@@ -108,7 +96,7 @@
   <div class="footer-grid">
     <div>
       <div class="brand" style="margin-bottom:14px">
-        <div class="logo-placeholder">Existing<br>ROCKS<br>logo</div>
+        <img class="site-logo" src="assets/rocks-logo.png" alt="The ROCKS, Inc. logo">
         <div class="brand-copy"><strong>THE ROCKS, INC.</strong><span>Prototype website</span></div>
       </div>
       <p style="color:#ccc">A nonprofit leadership and mentoring organization serving Army leaders, professionals, chapters, and supporters.</p>

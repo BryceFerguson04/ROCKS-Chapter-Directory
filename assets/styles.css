@@ -48,10 +48,7 @@ img{max-width:100%;display:block}
   display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:24px;
 }
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none}
-.logo-placeholder{
-  width:56px;height:56px;border:1px solid rgba(255,255,255,.5);
-  display:grid;place-items:center;text-align:center;font-size:.72rem;line-height:1.05;
-}
+.site-logo{display:block;width:48px;height:72px;object-fit:contain;flex:0 0 auto}
 .brand-copy strong{display:block;font-size:1rem;letter-spacing:.05em}
 .brand-copy span{display:block;color:#bbb;font-size:.84rem}
 .menu-toggle{
@@ -151,6 +148,44 @@ img{max-width:100%;display:block}
 .breadcrumbs{font-size:.9rem;color:#d7ddd8;margin-bottom:18px}
 .page-hero h1{font-size:clamp(2.5rem,5vw,4.7rem);margin:0 0 14px;line-height:1}
 .page-hero p{max-width:720px;font-size:1.15rem;color:#e7ece8}
+.mentorship-hero{
+  min-height:470px;padding-top:56px;padding-bottom:58px;isolation:isolate;
+  background-color:#202a23;
+  background-image:linear-gradient(90deg,rgba(23,31,25,.96) 0%,rgba(23,31,25,.84) 48%,rgba(23,31,25,.24) 100%),url("mentor-pair.jpg");
+  background-size:cover;background-position:center 42%;
+}
+.mentorship-hero .inner{max-width:var(--page)}
+.mentorship-hero .breadcrumbs{margin-bottom:28px}
+.mentorship-hero h1{max-width:760px;margin-top:12px;letter-spacing:-.04em}
+.mentorship-hero p{max-width:650px;margin:0 0 26px}
+.mentorship-hero .btn,.mentorship-card .btn{gap:10px}
+.mentorship-paths{padding-top:62px;padding-bottom:34px}
+.mentorship-paths .section-head{max-width:780px;margin-bottom:32px}
+.mentorship-paths .section-head h2{max-width:720px;letter-spacing:-.035em}
+.mentorship-card{
+  display:flex;flex-direction:column;border:1px solid #e1ddd3;border-radius:10px;
+  box-shadow:0 12px 30px rgba(34,35,29,.09);transition:transform .2s ease,box-shadow .2s ease;
+}
+.mentorship-card:hover{
+  transform:translateY(-5px);box-shadow:0 18px 38px rgba(34,35,29,.16)
+}
+.mentorship-card img{height:220px}
+.mentorship-card .path-card-body{display:flex;flex:1;flex-direction:column;padding:23px}
+.mentorship-card-label{
+  color:#687164;font-size:.76rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+}
+.mentorship-card h3{font-size:1.45rem;line-height:1.15;margin:10px 0 8px}
+.mentorship-card p{flex:1;margin-bottom:22px}
+.mentorship-card .btn{align-self:flex-start}
+.mentorship-card .btn-outline{color:var(--green);border-color:var(--green)}
+.mentorship-card .btn-outline:hover,.mentorship-card .btn-outline:focus-visible{
+  background:var(--green);color:#fff
+}
+.mentorship-page .btn{transition:filter .18s ease,transform .18s ease}
+.mentorship-page .btn:hover{filter:brightness(.94);transform:translateY(-1px)}
+.mentorship-page .btn:focus-visible{
+  outline:3px solid var(--gold);outline-offset:3px
+}
 .two-col{display:grid;grid-template-columns:1.1fr .9fr;gap:24px}
 .panel{background:#fff;border:1px solid var(--line);padding:26px;box-shadow:var(--shadow)}
 .feature-list{list-style:none;padding:0;margin:0;display:grid;gap:12px}
@@ -192,6 +227,10 @@ input,select,textarea{
   .path-grid,.steps,.cards-3,.stats-inner,.footer-grid,.form-grid{grid-template-columns:1fr}
   .quick-paths{margin-top:-18px}
   .header-actions{flex-wrap:wrap}
+  .mentorship-hero{min-height:0;padding-top:38px;padding-bottom:48px;background-position:60% center}
+  .mentorship-hero .breadcrumbs{margin-bottom:22px}
+  .mentorship-paths{padding-top:44px}
+  .mentorship-card img{height:205px}
 }
 
 .volunteer-hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
@@ -219,6 +258,7 @@ input,select,textarea{
 .opportunity-details strong{color:var(--ink)}
 .opportunity-card .btn{margin-top:auto;align-self:flex-start}
 .opportunity-card .btn:disabled{opacity:.65;cursor:default}
+.opportunity-card .clone-opportunity{margin:8px 0 0;color:var(--green);border-color:var(--green)}
 .opportunity-applicants{width:100%;margin-top:18px;padding:15px;background:#f4f2ec;border:1px solid var(--line);border-radius:4px}
 .opportunity-applicants[hidden]{display:none}
 .opportunity-applicants h4{margin:0 0 5px}
@@ -238,6 +278,10 @@ input,select,textarea{
 .profile-progress span{display:block;width:0;height:100%;background:var(--green);transition:width .2s ease}
 .profile-small,.form-hint,.optional{font-size:.9rem;color:var(--muted)}
 .volunteer-form{padding:28px}
+.saved-profile-details{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 20px;margin:20px 0}
+.saved-profile-item{padding:12px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
+.saved-profile-item dt{font-weight:800;color:var(--ink)}
+.saved-profile-item dd{margin:4px 0 0;color:var(--muted);white-space:pre-wrap}
 .volunteer-form h3{font-size:1.45rem;margin:0}
 .form-hint{margin:4px 0 18px}
 .choice-field{border:0;padding:0;margin:4px 0}
@@ -279,18 +323,21 @@ input,select,textarea{
   .volunteer-stat strong{font-size:1.2rem}
   .opportunity-grid{grid-template-columns:1fr}
   .volunteer-form{padding:20px}
+  .saved-profile-details{grid-template-columns:1fr}
   .choice-grid{grid-template-columns:1fr}
   .roster-toolbar{grid-template-columns:1fr}
   .roster-toolbar .btn{justify-self:start}
+  .coordinator-panel{padding:18px}
+  .pending-opportunity{align-items:flex-start;flex-direction:column}
 }
 .login-demo-section{padding-top:44px}
 .login-demo-note{
   max-width:1000px;margin:0 auto 22px;padding:15px 18px;border:1px solid #d3c38e;
   border-left:5px solid var(--gold);background:#fbf5df;color:#3e392a;border-radius:4px
 }
-.login-demo-grid{max-width:1000px;margin:auto;display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.login-demo-grid{max-width:1000px;margin:auto;display:grid;grid-template-columns:minmax(0,1fr);gap:20px}
 .login-demo-card{
-  display:flex;flex-direction:column;align-items:flex-start;background:#fff;border:1px solid var(--line);
+  min-width:0;display:flex;flex-direction:column;align-items:flex-start;background:#fff;border:1px solid var(--line);
   border-top:5px solid var(--gold);padding:28px;box-shadow:var(--shadow)
 }
 .login-demo-card-admin{border-top-color:var(--green)}
@@ -298,6 +345,14 @@ input,select,textarea{
 .login-demo-card p{color:var(--muted)}
 .login-demo-card .feature-list{margin:8px 0 24px}
 .login-demo-card .btn{margin-top:auto}
+.login-signup-link{max-width:1000px;margin:18px auto;text-align:center;font-weight:700}
+.login-signup-link a{color:var(--green)}
+.demo-login-form{width:100%;margin:12px 0}
+.demo-login-form .btn{margin:12px 0 0}
+.demo-credentials-heading{font-size:1.15rem;margin:14px 0 8px}
+.login-demo-card .table-scroll{width:100%;max-width:100%;min-width:0;overflow-x:auto}
+.login-demo-card code{font-size:.88rem;overflow-wrap:anywhere}
+.president-chapter-filter{max-width:360px;margin:0 0 20px}
 .login-demo-status{min-height:1.5em;text-align:center;color:var(--green);font-weight:700}
 .login-production-note{max-width:1000px;margin:30px auto 0;padding:24px;background:#efede7;border-left:5px solid var(--green)}
 .login-production-note h2{font-size:1.3rem;margin:0 0 8px}
@@ -341,6 +396,25 @@ input,select,textarea{
 .application-status[data-status="Approved"]{background:#e2efe5;color:#245b32}
 .application-status[data-status="Submitted"],.application-status[data-status="Under Review"]{background:#fbf1d5;color:#684f08}
 .application-table td .btn{padding:8px 11px;font-size:.88rem;white-space:nowrap}
+.coordinator-panel{
+  margin:24px 0;padding:24px;background:#fff;border:1px solid var(--line);box-shadow:var(--shadow)
+}
+.coordinator-panel>h3,.opportunity-request-form>h3{margin:0 0 8px;font-size:1.35rem}
+.coordinator-panel>p,.opportunity-request-form>p{color:var(--muted)}
+.chapter-report-panel .btn{margin-top:16px}
+.chapter-admin-management .form-feedback,.opportunity-request-form .form-feedback{margin-bottom:0}
+.opportunity-request-form{margin:24px 0}
+.opportunity-request-form .btn{margin-top:18px}
+.pending-opportunity-list{display:grid;gap:12px}
+.pending-opportunity{
+  display:flex;align-items:center;justify-content:space-between;gap:20px;
+  padding:18px;background:#f7f5f0;border:1px solid var(--line)
+}
+.pending-opportunity h4{margin:6px 0}
+.pending-opportunity p{margin:4px 0}
+.pending-opportunity-actions{display:flex;flex-wrap:wrap;gap:8px;flex-shrink:0}
+.pending-opportunity-actions .btn-outline{color:var(--green);border-color:var(--green)}
+.pending-opportunity .profile-small{margin-top:8px}
 .coordinator-subheading{margin:28px 0 12px}
 .signup-confirmation{
   width:min(92vw,520px);padding:0;border:1px solid var(--line);border-radius:8px;

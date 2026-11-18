@@ -18,7 +18,7 @@
 <header class="site-header">
   <div class="nav-wrap">
     <a href="index.html" class="brand">
-      <div class="logo-placeholder">Existing<br>ROCKS<br>logo</div>
+      <img class="site-logo" src="assets/rocks-logo.png" alt="The ROCKS, Inc. logo">
       <div class="brand-copy"><strong>THE ROCKS, INC.</strong><span>Leadership through mentorship</span></div>
     </a>
     <button class="menu-toggle" aria-expanded="false" aria-controls="mainnav">Menu</button>
@@ -71,13 +71,17 @@
   </div>
   <section class="demo-session-bar" id="demo-session" aria-label="Demo session" hidden>
     <div><span class="demo-session-label">Current demo view</span><strong id="demo-session-role"></strong></div>
-    <div class="demo-session-actions"><a href="login.html">Switch demo view</a><button class="btn btn-outline" id="demo-sign-out" type="button">Sign out</button></div>
+    <div class="demo-session-actions">
+      <button class="btn btn-gold" id="demo-profile-action" type="button" hidden>Update my profile</button>
+      <a href="login.html">Switch demo view</a>
+      <button class="btn btn-outline" id="demo-sign-out" type="button">Sign out</button>
+    </div>
   </section>
   <section class="section member-dashboard" id="my-activity" hidden>
     <div class="section-head">
       <div class="eyebrow">My volunteer activity</div>
       <h2>Welcome back, <span id="member-dashboard-name">volunteer</span>.</h2>
-      <p>Your personal snapshot keeps applications and service activity easy to follow.</p>
+      <p>Your applications and volunteer history are private to your own volunteer view.</p>
     </div>
     <div class="member-status-update" id="member-status-update" role="status" aria-live="polite" hidden>
       <strong id="member-status-title"></strong>
@@ -87,11 +91,11 @@
     <div class="member-metrics">
       <article class="member-metric"><strong id="member-applications-count">0</strong><span>Applications</span></article>
       <article class="member-metric"><strong id="member-pending-count">0</strong><span>Awaiting review</span></article>
-      <article class="member-metric"><strong id="member-approved-hours">0</strong><span>Approved hours</span></article>
+      <article class="member-metric"><strong id="member-approved-hours">0</strong><span>Recorded service hours</span></article>
       <article class="member-metric"><strong id="member-profile-completion">0%</strong><span>Profile complete</span></article>
     </div>
     <div class="member-activity-panel">
-      <div><h3>My applications</h3><div id="member-application-list"></div></div>
+      <div><h3>My volunteer history and applications</h3><div id="member-application-list"></div></div>
       <div class="member-dashboard-actions">
       <a class="btn btn-dark" id="update-member-profile" href="#volunteer-profile">Update my profile</a>
         <a class="btn btn-outline" href="#opportunities">Find an opportunity</a>
@@ -105,7 +109,7 @@
   </div>
   <section class="volunteer-stats" aria-label="Volunteer impact">
     <div class="volunteer-stat"><strong id="volunteer-count">0</strong><span>Volunteers in this demo</span></div>
-    <div class="volunteer-stat"><strong id="hours-count">0</strong><span>Approved service hours</span></div>
+    <div class="volunteer-stat"><strong id="hours-count">0</strong><span>Recorded service hours</span></div>
     <div class="volunteer-stat"><strong id="opportunity-count">0</strong><span>Open opportunities</span></div>
     <div class="volunteer-stat"><strong>One ROCKS community</strong><span>Serving through mentorship, leadership, and connection</span></div>
   </section>
@@ -125,28 +129,59 @@
       <div class="profile-intro">
         <div class="eyebrow">Your volunteer profile</div>
         <h2>Tell us how you’d like to serve.</h2>
-        <p>Share your interests, experience, and availability once. In this demo, your profile stays in this browser and can be updated any time.</p>
+        <p>Complete your profile once, then update it whenever your interests or information change. In this demo, it stays in this browser.</p>
         <div class="profile-progress-wrap">
           <div class="profile-progress-heading"><span>Profile completion</span><strong id="profile-progress-label">0%</strong></div>
           <div class="profile-progress" role="progressbar" aria-label="Profile completion" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="profile-progress"><span></span></div>
         </div>
         <p class="profile-small">Your information should only be shared with authorized volunteer leaders in a real, secure system.</p>
       </div>
+      <section class="panel volunteer-form saved-profile" id="saved-profile" aria-labelledby="saved-profile-heading" hidden>
+        <h3 id="saved-profile-heading">Your saved profile</h3>
+        <p class="form-hint">Your information is saved in this browser. It will stay here until you choose to update it.</p>
+        <p class="form-feedback" id="saved-profile-status" role="status" aria-live="polite" hidden></p>
+        <button class="btn btn-outline" id="profile-sms-retry" type="button" hidden>Retry profile update text</button>
+        <dl class="saved-profile-details" id="saved-profile-details"></dl>
+        <div class="form-actions">
+          <button class="btn btn-dark" id="edit-saved-profile" type="button">Update my profile</button>
+          <a class="btn btn-outline" href="#opportunities">Find an opportunity</a>
+        </div>
+      </section>
       <form class="panel volunteer-form" id="volunteer-form">
         <input type="hidden" id="profile-id">
         <h3>Volunteer information</h3>
         <p class="form-hint" id="profile-form-hint">Fields marked with * are required. Please fill in your own information; details are not prefilled.</p>
         <div class="form-grid">
           <div class="field"><label for="vol-name">Full name *</label><input id="vol-name" name="name" autocomplete="name" required maxlength="100"></div>
-          <div class="field"><label for="vol-type">Member type *</label><select id="vol-type" name="memberType" required><option value="">Select one</option><option>Active</option><option>Retired</option><option>Lifelong</option><option>Guest volunteer</option></select></div>
+          <div class="field"><label for="vol-type">Member type *</label><select id="vol-type" name="memberType" required><option value="">Select one</option><option>Active</option><option>Retired</option><option>Lifelong</option><option>Non-member guest volunteer</option></select></div>
           <div class="field"><label for="vol-email">Email *</label><input id="vol-email" name="email" type="email" autocomplete="email" required maxlength="160"></div>
-          <div class="field"><label for="vol-phone">Telephone</label><input id="vol-phone" name="phone" type="tel" autocomplete="tel" maxlength="40"></div>
+          <div class="field"><label for="vol-phone">Telephone</label><input id="vol-phone" name="phone" type="tel" autocomplete="tel" maxlength="40" placeholder="+15551234567"><p class="form-hint">Use international format (for example, +15551234567) to receive texts.</p></div>
           <div class="field"><label for="vol-chapter">Chapter</label><input id="vol-chapter" name="chapter" maxlength="100" placeholder="e.g., Capital Region"></div>
           <div class="field"><label for="vol-city">City</label><input id="vol-city" name="city" autocomplete="address-level2" maxlength="80"></div>
           <div class="field"><label for="vol-state">State</label><input id="vol-state" name="state" autocomplete="address-level1" maxlength="40"></div>
           <div class="field"><label for="vol-timezone">Time zone</label><select id="vol-timezone" name="timeZone"><option value="">Select one</option><option>Eastern</option><option>Central</option><option>Mountain</option><option>Pacific</option><option>Alaska</option><option>Hawaii-Aleutian</option><option>Other</option></select></div>
-          <div class="field"><label for="vol-service">Service category</label><select id="vol-service" name="serviceCategory"><option value="">Select one</option><option>Army</option><option>Air Force</option><option>Navy</option><option>Marines</option><option>USAR</option><option>ANG</option><option>Other</option><option>Non-member</option></select></div>
-          <div class="field"><label for="vol-rank">Rank / professional category</label><input id="vol-rank" name="rank" maxlength="50" placeholder="Optional"></div>
+          <div class="field"><label for="vol-service">Service category</label><select id="vol-service" name="serviceCategory"><option value="">Select one</option><option>Army</option><option>Air Force</option><option>Navy</option><option>Marines</option><option>USAR</option><option>ANG</option><option>Other</option></select></div>
+          <div class="field"><label for="vol-rank">Rank / professional category</label><select id="vol-rank" name="rank"><option value="">Select one</option><option>Cadet</option><option>Warrant Officer</option><option>DoW civilian</option><option>O-1</option><option>O-2</option><option>O-3</option><option>O-4</option><option>O-5</option><option>O-6</option><option>O-7</option><option>O-8</option><option>O-9</option><option>O-10</option></select></div>
+          <fieldset class="field full choice-field" id="guest-fields" hidden>
+            <legend>Guest volunteer details</legend>
+            <p class="form-hint">A sponsoring member is required so their hours can count toward chapter and event totals.</p>
+            <div class="form-grid">
+              <div class="field"><label for="vol-sponsor-name">Sponsoring member name *</label><input id="vol-sponsor-name" name="sponsorName" maxlength="100"></div>
+              <div class="field"><label for="vol-sponsor-email">Sponsoring member email *</label><input id="vol-sponsor-email" name="sponsorEmail" type="email" maxlength="160"></div>
+              <div class="field full"><label class="consent-label"><input type="checkbox" name="waiver"> Guest volunteer waiver acknowledged *</label></div>
+            </div>
+          </fieldset>
+          <fieldset class="field full choice-field">
+            <legend>Safety and participation</legend>
+            <div class="form-grid">
+              <div class="field"><label for="vol-emergency-name">Emergency contact name <span class="optional">(when appropriate)</span></label><input id="vol-emergency-name" name="emergencyContactName" maxlength="100"></div>
+              <div class="field"><label for="vol-emergency-phone">Emergency contact telephone</label><input id="vol-emergency-phone" name="emergencyContactPhone" type="tel" maxlength="40"></div>
+              <div class="field"><label for="vol-certifications">Required certifications</label><input id="vol-certifications" name="certifications" maxlength="500" placeholder="List certifications or enter None"></div>
+              <div class="field"><label for="vol-screening">Background screening status</label><select id="vol-screening" name="screeningStatus"><option value="Not required">Not required</option><option>Required - not started</option><option>Pending</option><option>Complete</option></select></div>
+              <div class="field full"><label class="consent-label"><input type="checkbox" name="conductAcknowledged" required> I acknowledge the ROCKS volunteer code of conduct. *</label></div>
+              <div class="field full"><label class="consent-label"><input type="checkbox" name="releaseAcknowledged" required> I acknowledge the applicable liability waiver and photo-release terms. *</label></div>
+            </div>
+          </fieldset>
           <fieldset class="field full choice-field"><legend>What are you interested in? <span class="optional">(choose any)</span></legend>
             <div class="choice-grid">
               <label><input type="checkbox" name="interests" value="Mentoring"> Mentoring</label>
@@ -172,9 +207,10 @@
               <label><input type="checkbox" name="serviceModes" value="Outside home chapter"> Outside my home chapter</label>
             </div>
           </fieldset>
-          <div class="field full choice-field"><label class="consent-label"><input type="checkbox" name="notifications"> I agree to receive volunteer opportunity notifications.</label></div>
+          <div class="field full choice-field"><label class="consent-label"><input type="checkbox" name="notifications"> I consent to receive volunteer opportunity notifications by email.</label></div>
+          <div class="field full choice-field"><label class="consent-label"><input type="checkbox" name="smsNotifications"> I opt in to volunteer signup confirmations by text message (message/data rates may apply).</label><p class="form-hint" id="sms-status">SMS delivery may have provider and recipient costs. Confirm provider pricing and budget before enabling in production.</p></div>
         </div>
-        <div class="form-actions"><button class="btn btn-dark" type="submit">Save volunteer profile</button><button class="btn btn-outline" type="reset" id="profile-reset">Clear form</button></div>
+        <div class="form-actions"><button class="btn btn-dark" type="submit">Create volunteer profile</button><button class="btn btn-outline" type="reset" id="profile-reset">Clear form</button><button class="btn btn-outline" id="cancel-profile-update" type="button" hidden>Cancel update</button></div>
         <p class="form-feedback" id="profile-feedback" role="status" aria-live="polite"></p>
       </form>
     </div>
@@ -182,27 +218,91 @@
 
   <section class="section coordinator-section" id="coordinator" hidden>
     <div class="section-head">
-      <div class="eyebrow">Coordinator workspace · Demo</div>
+      <div class="eyebrow">Role-based admin workspace · Demo</div>
       <h2>Keep your volunteer roster organized.</h2>
       <p>Search the saved profiles, update volunteer details through the profile form, and export the roster as a CSV file that opens in Excel.</p>
     </div>
-    <div class="coordinator-warning"><strong>Demo workspace only:</strong> This page does not verify coordinator permissions. Roster data is available to anyone using this browser. Do not use it to store real or confidential member information.</div>
+    <div class="coordinator-warning"><strong>Demo workspace only:</strong> Role views demonstrate intended permissions but do not authenticate users or secure browser data. Use synthetic data only.</div>
+    <p class="profile-small" id="workspace-role-scope"></p>
+    <div class="field president-chapter-filter" id="president-chapter-filter-wrap" hidden>
+      <label for="president-chapter-filter">View chapter</label>
+      <select id="president-chapter-filter">
+        <option value="All Chapters">All Chapters</option>
+        <option value="Capital Region">Capital Region</option>
+        <option value="Southeast">Southeast</option>
+        <option value="West">West</option>
+      </select>
+    </div>
     <div class="roster-toolbar">
       <label class="roster-search-label" for="roster-search">Search volunteers</label>
       <input id="roster-search" type="search" placeholder="Search name, email, chapter, or interest">
-      <button class="btn btn-gold" id="export-roster" type="button">Export roster CSV</button>
     </div>
     <div class="roster-summary" id="roster-summary" aria-live="polite"></div>
+    <section class="coordinator-panel chapter-report-panel" id="chapter-reports" hidden>
+      <h3>Chapter reports</h3>
+      <p class="profile-small" id="chapter-report-summary"></p>
+      <div class="table-scroll">
+        <table class="roster-table">
+          <caption class="visually-hidden">Chapter-level volunteer activity report.</caption>
+          <thead><tr><th scope="col">Chapter</th><th scope="col">Volunteers</th><th scope="col">Published opportunities</th><th scope="col">Applications</th><th scope="col">Recorded service hours</th></tr></thead>
+          <tbody id="chapter-report-body"></tbody>
+        </table>
+      </div>
+      <button class="btn btn-gold" id="export-chapter-report" type="button" hidden>Export chapter report CSV</button>
+    </section>
+    <section class="coordinator-panel chapter-admin-management" id="chapter-admin-management" hidden>
+      <h3>Chapter access</h3>
+      <p>Chapter Presidents can appoint or remove chapter admins for their own chapter. HR Coordinators can manage chapter access across the organization.</p>
+      <div class="table-scroll">
+        <table class="roster-table">
+          <caption class="visually-hidden">Volunteer chapter-admin assignments.</caption>
+          <thead><tr><th scope="col">Volunteer</th><th scope="col">Chapter</th><th scope="col">Current role</th><th scope="col">Action</th></tr></thead>
+          <tbody id="chapter-admin-body"></tbody>
+        </table>
+        <p class="empty-state" id="chapter-admin-empty" hidden>No eligible chapter volunteers are available for this selection.</p>
+      </div>
+      <p class="form-feedback" id="chapter-admin-feedback" role="status" aria-live="polite"></p>
+    </section>
+    <form class="panel opportunity-request-form" id="opportunity-request-form" hidden>
+      <h3>Submit a chapter opportunity</h3>
+      <p class="profile-small">New opportunities stay in review until a Chapter President or HR Coordinator approves them for publication.</p>
+      <div class="form-grid">
+        <div class="field"><label for="opportunity-title">Opportunity title</label><input id="opportunity-title" name="title" required maxlength="100"></div>
+        <div class="field"><label for="opportunity-chapter">Chapter</label><select id="opportunity-chapter" name="chapter" required></select></div>
+        <div class="field"><label for="opportunity-mission">Mission area</label><select id="opportunity-mission" name="mission" required><option>Community service</option><option>Mentorship</option><option>Scholarships</option><option>Leadership development</option><option>Networking</option></select></div>
+        <div class="field"><label for="opportunity-date">Event date</label><input id="opportunity-date" name="date" type="date" required></div>
+        <div class="field"><label for="opportunity-location">Location</label><input id="opportunity-location" name="location" required maxlength="120"></div>
+        <div class="field"><label for="opportunity-hours">Estimated service hours</label><input id="opportunity-hours" name="hours" type="number" min="1" max="24" step="1" required></div>
+        <div class="field"><label for="opportunity-openings">Volunteer openings</label><input id="opportunity-openings" name="openings" type="number" min="1" max="500" step="1" required></div>
+        <div class="field full"><label for="opportunity-description">What will volunteers do?</label><textarea id="opportunity-description" name="description" rows="3" required maxlength="500"></textarea></div>
+      </div>
+      <button class="btn btn-dark" type="submit">Submit for approval</button>
+      <p class="form-feedback" id="opportunity-request-feedback" role="status" aria-live="polite"></p>
+    </form>
+    <section class="coordinator-panel pending-opportunity-review" id="pending-opportunity-review" hidden>
+      <h3>Opportunity approvals</h3>
+      <div id="pending-opportunity-list" class="pending-opportunity-list"></div>
+      <p class="empty-state" id="pending-opportunity-empty" hidden>No opportunities are waiting for approval in this chapter.</p>
+      <p class="form-feedback" id="opportunity-review-feedback" role="status" aria-live="polite"></p>
+    </section>
     <h3 class="coordinator-subheading">Application activity</h3>
     <div class="table-scroll">
       <table class="roster-table application-table">
         <caption class="visually-hidden">Submitted demo applications by volunteer and opportunity.</caption>
-        <thead><tr><th scope="col">Volunteer</th><th scope="col">Opportunity</th><th scope="col">Chapter</th><th scope="col">Status</th><th scope="col">Submitted</th><th scope="col">Decision</th></tr></thead>
+        <thead><tr><th scope="col">Volunteer</th><th scope="col">Opportunity</th><th scope="col">Chapter</th><th scope="col">Application status</th><th scope="col">Hours credited to</th><th scope="col">Submitted</th><th scope="col">Decision</th><th scope="col">Completion verification</th></tr></thead>
         <tbody id="application-body"></tbody>
       </table>
       <p class="empty-state" id="application-empty" hidden>No demo applications yet. Volunteer applications will appear here.</p>
     </div>
     <p class="form-feedback" id="application-feedback" role="status" aria-live="polite"></p>
+    <h3 class="coordinator-subheading">Sensitive profile access log</h3>
+    <div class="table-scroll">
+      <table class="roster-table">
+        <caption class="visually-hidden">Local demo log of administrator profile access.</caption>
+        <thead><tr><th scope="col">Time</th><th scope="col">Demo role</th><th scope="col">Action</th><th scope="col">Volunteer</th></tr></thead>
+        <tbody id="access-log-body"></tbody>
+      </table>
+    </div>
     <div class="table-scroll">
       <table class="roster-table">
         <caption class="visually-hidden">Volunteer roster. Profile details are stored in this browser for this prototype.</caption>
@@ -219,6 +319,8 @@
       <h2 id="signup-confirmation-title">You’re signed up!</h2>
       <p id="signup-confirmation-message">We’ve saved your spot. We look forward to seeing you soon.</p>
       <p class="signup-confirmation-opportunity" id="signup-confirmation-opportunity"></p>
+      <p class="form-feedback" id="signup-sms-status" role="status" aria-live="polite"></p>
+      <button class="btn btn-outline" id="signup-sms-retry" type="button" hidden>Retry text confirmation</button>
       <div class="signup-confirmation-actions">
         <button class="btn btn-dark" id="signup-view-activity" type="button">View my activity</button>
         <button class="btn btn-outline" id="signup-close" type="button">Keep exploring</button>
@@ -229,7 +331,7 @@
 <footer class="site-footer">
   <div class="footer-grid">
     <div>
-      <div class="brand" style="margin-bottom:14px"><div class="logo-placeholder">Existing<br>ROCKS<br>logo</div><div class="brand-copy"><strong>THE ROCKS, INC.</strong><span>Prototype website</span></div></div>
+      <div class="brand" style="margin-bottom:14px"><img class="site-logo" src="assets/rocks-logo.png" alt="The ROCKS, Inc. logo"><div class="brand-copy"><strong>THE ROCKS, INC.</strong><span>Prototype website</span></div></div>
       <p style="color:#ccc">A nonprofit leadership and mentoring organization serving Army leaders, professionals, chapters, and supporters.</p>
     </div>
     <div><h3>Mentorship</h3><ul><li><a href="become-a-mentor.html">Become a Mentor</a></li><li><a href="find-a-mentor.html">Find a Mentor</a></li><li><a href="how-it-works.html">How It Works</a></li></ul></div>
