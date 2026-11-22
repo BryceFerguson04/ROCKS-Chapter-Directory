@@ -62,26 +62,35 @@
 <section class="page-hero">
   <div class="inner">
     <div class="breadcrumbs"><a href="index.html">Home</a> / Chapters</div>
-    <h1>Find your nearest chapter</h1>
-    <p>A future chapter finder should support ZIP code, state, installation, country, and an accessible text directory.</p>
+    <h1>Find a ROCKS chapter</h1>
+    <p>Explore active chapters, interest groups, and international chapters across the ROCKS community.</p>
   </div>
 </section>
 
-<section class="section">
-  <div class="panel">
-    <h2>Search chapters</h2>
-    <div class="form-grid">
-      <div class="field"><label for="zip">ZIP code or installation</label><input id="zip" placeholder="Enter ZIP code or installation"></div>
-      <div class="field"><label for="region">State or region</label><select id="region"><option>Select a state or region</option><option>Mid-Atlantic</option><option>Southeast</option><option>West</option></select></div>
-    </div>
-    <p style="margin-top:18px"><button class="btn btn-gold" type="button">Find Chapters</button></p>
+<section class="section chapter-directory" aria-labelledby="directory-heading">
+  <div class="section-head">
+    <span class="eyebrow">Chapter directory</span>
+    <h2 id="directory-heading">Explore the directory</h2>
+    <p>Search by chapter name, city, state, or installation, or filter by chapter type.</p>
   </div>
+  <div class="c2-controls" role="search" aria-label="Search and filter chapters">
+    <label class="c2-search-label" for="c2Search">Search chapters</label>
+    <input class="c2-search" type="search" id="c2Search" placeholder="Search name, location, or installation" oninput="renderDirectory()" aria-controls="c2Body">
+    <div class="c2-filters" role="group" aria-label="Filter chapter types">
+      <button class="c2-filter active" type="button" data-filter="all" aria-pressed="true" onclick="setFilter(this,'all')">All</button>
+      <button class="c2-filter" type="button" data-filter="chapter" aria-pressed="false" onclick="setFilter(this,'chapter')">Chapters</button>
+      <button class="c2-filter" type="button" data-filter="interest" aria-pressed="false" onclick="setFilter(this,'interest')">Interest Groups</button>
+      <button class="c2-filter" type="button" data-filter="intl" aria-pressed="false" onclick="setFilter(this,'intl')">International</button>
+    </div>
+  </div>
+  <div class="c2-body" id="c2Body" aria-live="polite"></div>
 </section>
-<section class="section compact">
-  <div class="cards-3">
-    <article class="info-card"><h3>Example Chapter A</h3><p>Location, meeting details, contact, and recent activity.</p></article>
-    <article class="info-card"><h3>Example Chapter B</h3><p>Location, meeting details, contact, and recent activity.</p></article>
-    <article class="info-card"><h3>No nearby chapter?</h3><p>Contact the national organization to learn about nearby programs or chapter development.</p></article>
+
+<section class="section compact chapter-directory-help">
+  <div class="callout">
+    <h2>Don't see a chapter near you?</h2>
+    <p>Contact the national organization to learn about nearby programs or starting a chapter.</p>
+    <a class="btn btn-dark" href="contact.html">Contact ROCKS</a>
   </div>
 </section>
 
@@ -116,6 +125,7 @@
   <div class="footer-bottom">Concept prototype for client review. All impact figures and eligibility details are placeholders pending verification.</div>
 </footer>
 <script src="assets/site.js"></script>
+<script src="assets/chapter-directory.js"></script>
 
 </body>
 </html>
