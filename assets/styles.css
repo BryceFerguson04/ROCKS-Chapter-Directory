@@ -449,7 +449,32 @@ input,select,textarea{
   .signup-confirmation-content{padding:26px 20px}
 }
 
+.chapters-page{
+  --black:#171717;
+  --green:#242424;
+  --gold:#e5b93f;
+  --tan:#f7f6f0;
+  --field1:#242424;
+  background:#eceff1;
+}
 .chapter-directory{padding-top:54px}
+.chapters-page .section-head .eyebrow{color:var(--gold)}
+.chapters-page .page-hero{background:var(--black)}
+.chapters-page .c2-controls{background:var(--black)}
+.chapters-page .c2-card{
+  background:#242424;color:var(--gold);
+  border-color:rgba(229,185,63,.45);border-top-color:var(--gold);
+}
+.chapters-page .c2-card.interest,.chapters-page .c2-card.intl{border-top-color:var(--gold)}
+.chapters-page .c2-card .c2-loc,
+.chapters-page .c2-card .c2-loc a,
+.chapters-page .c2-card .c2-email,
+.chapters-page .c2-card .c2-no-contact,
+.chapters-page .c2-card .c2-expand-toggle,
+.chapters-page .c2-card .c2-status-text{color:var(--gold)}
+.chapters-page .c2-card .c2-expand-toggle,
+.chapters-page .c2-card .c2-footer{border-color:rgba(229,185,63,.35)}
+.chapters-page .c2-card .c2-status-dot{background:var(--gold)}
 .c2-controls{
   display:flex;align-items:center;gap:10px;flex-wrap:wrap;
   padding:18px;background:var(--green);border-bottom:4px solid var(--gold);
